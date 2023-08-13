@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Notifications</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <div style="padding: 5vh 5vw">
+      <h1 style="text-align: center">Web Notifications</h1>
+      <button onclick="notifyMe()" class="btn">Notification</button>
+    </div>
+  </body>
+  <script>
+    function notifyMe() {
+      if (!("Notification" in window)) {
+        alert("This browser does not support desktop notification");
+      } else if (Notification.permission === "granted") {
+        const notification = new Notification("Hi there!");
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            const notification = new Notification("Hi there!");
+          }
+        });
+      }
+    }
+
+    notifyMe();
+  </script>
+</html>
